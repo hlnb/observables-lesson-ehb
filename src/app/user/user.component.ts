@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { UsersService } from './users.service';
 
 @Component({
   selector: 'app-user',
@@ -9,7 +10,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class UserComponent implements OnInit {
   id: number;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private usersSvc:UsersService) { }
 
   ngOnInit() {
     //subscriber is observer. takes three arguments
@@ -20,6 +21,10 @@ export class UserComponent implements OnInit {
         }
 
       );
+  }
+
+  onActivate(){
+    this.usersSvc.userActivated.next(this.id);
   }
 
 }
